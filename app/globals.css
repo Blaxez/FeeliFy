@@ -33,3 +33,17 @@ body {
     background: var(--bg);
     color: var(--fg);
 }
+
+/* 
+   Robust Logo Adaptation 
+   - Default (Light Mode): Invert White Logo to Black
+   - Dark Mode (.dark class): Keep Logo White
+*/
+.logo-adaptive {
+    filter: invert(1);
+    transition: filter 0.3s ease;
+}
+
+:root.dark .logo-adaptive {
+    filter: invert(0);
+}

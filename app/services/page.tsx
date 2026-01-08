@@ -166,7 +166,8 @@ export default function ServicesPage() {
             <motion.div
               key={i}
               onMouseEnter={() => setActiveService(i)}
-              className={`group relative p-8 md:p-12 border-b border-[var(--border)] cursor-pointer overflow-hidden transition-colors duration-500 ${
+              onClick={() => setActiveService(activeService === i ? -1 : i)} // Toggle on click for mobile
+              className={`group relative p-6 md:p-12 border-b border-[var(--border)] cursor-pointer overflow-hidden transition-colors duration-500 ${
                 activeService === i
                   ? "bg-[var(--fg)] text-[var(--bg)]"
                   : "hover:bg-[var(--surface)]"

@@ -8,6 +8,11 @@ import { ScrollPersistence } from "@/components/hooks/useScrollPersistence";
 export const metadata = {
   title: "Feelify Solutions - Digital Growth Partners",
   description: "We don't just market - we build brands that people feel.",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/logo.png", // Using the png for apple touch icon equivalent
+  },
 };
 
 export default function RootLayout({

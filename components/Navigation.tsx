@@ -103,9 +103,38 @@ export const Navigation = () => {
               ))}
             </div>
             <div className="absolute bottom-10 left-6 md:left-20 flex gap-8 text-black font-mono text-sm uppercase tracking-widest pointer-events-none md:pointer-events-auto">
-              <span>Instagram</span>
-              <span>LinkedIn</span>
-              <span>Twitter</span>
+              <a
+                href="https://www.instagram.com/feelify_solutions?utm_source=qr&igsh=eGo0cnE2Zmxhcjg3"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-neutral-500 transition-colors"
+              >
+                Instagram
+              </a>
+              <a
+                href="https://www.linkedin.com/company/110243723/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-neutral-500 transition-colors"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://www.facebook.com/61585100334454/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-neutral-500 transition-colors"
+              >
+                Facebook
+              </a>
+              <a
+                href="https://wa.me/916394806825"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-neutral-500 transition-colors"
+              >
+                WhatsApp
+              </a>
             </div>
           </motion.div>
         )}
@@ -117,19 +146,31 @@ export const Navigation = () => {
         transition={{ delay: 0.8, duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
         className="fixed top-0 w-full z-50 px-6 py-6 md:px-10 md:py-8 flex justify-between items-start pointer-events-none"
       >
-        <div className="flex flex-col mix-blend-difference text-[var(--inverse)] pointer-events-auto">
-          <Link href="/" className="text-xl font-black tracking-tighter">
-            FEELIFY.
+        <div className="flex items-center gap-3 mix-blend-difference text-[var(--inverse)] pointer-events-auto">
+          <Link href="/" className="relative w-10 h-10 md:w-12 md:h-12">
+            <img
+              src="/logo.png"
+              alt="Feelify Logo"
+              className="w-full h-full object-contain logo-adaptive"
+            />
           </Link>
-          <span className="text-[10px] font-mono uppercase tracking-widest opacity-60">
-            Solutions
-          </span>
+          <div className="flex flex-col">
+            <Link
+              href="/"
+              className="text-xl font-black tracking-tighter leading-none"
+            >
+              FEELIFY.
+            </Link>
+            <span className="text-[10px] font-mono uppercase tracking-widest opacity-60 leading-none">
+              Solutions
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center gap-4 pointer-events-auto">
           <button
             onClick={toggleTheme}
-            className="w-12 h-12 border border-[var(--border)] rounded-full flex items-center justify-center hover:bg-[var(--fg)] hover:text-[var(--bg)] transition-colors relative z-[60] bg-[var(--bg)]"
+            className="w-10 h-10 border border-[var(--border)] rounded-full flex items-center justify-center hover:bg-[var(--fg)] hover:text-[var(--bg)] transition-colors relative z-[60] bg-[var(--bg)]"
           >
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
@@ -138,7 +179,7 @@ export const Navigation = () => {
             className="group flex items-center gap-4 cursor-pointer relative z-[60]"
           >
             <div
-              className={`w-12 h-12 border rounded-full flex items-center justify-center transition-all bg-[var(--bg)] ${
+              className={`w-10 h-10 border rounded-full flex items-center justify-center transition-all bg-[var(--bg)] ${
                 isOpen
                   ? "border-black text-black !bg-transparent"
                   : "border-[var(--border)] text-[var(--fg)] hover:bg-[var(--fg)] hover:text-[var(--bg)]"

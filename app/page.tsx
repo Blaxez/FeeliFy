@@ -117,8 +117,16 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
       }}
       className="fixed inset-0 bg-[#FF3300] z-[99999] flex flex-col justify-between p-8 md:p-12 text-black font-bold"
     >
-      <div className="flex justify-between items-start">
-        <span>FEELIFY™</span>
+      <div className="flex justify-between items-start w-full">
+        <div className="flex items-center gap-2">
+          {/* Force logo to black to match the black text on the orange background */}
+          <img
+            src="/logo.png"
+            alt="Logo"
+            className="w-8 h-8 object-contain brightness-0 invert"
+          />
+          <span>FEELIFY™</span>
+        </div>
         <span>INITIALIZING...</span>
       </div>
       <div className="text-[20vw] leading-none tracking-tighter">
@@ -193,7 +201,7 @@ const HeroText3D = () => {
             initial={{ y: "110%" }}
             animate={{ y: 0 }}
             transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.5 }}
-            className="text-[12vw] md:text-[13vw] leading-[0.85] font-black tracking-tighter uppercase text-[var(--fg)]"
+            className="text-[12vw] md:text-[13vw] leading-[0.85] font-black tracking-tighter uppercase text-[var(--fg)] break-all md:break-normal"
           >
             Business
           </motion.h1>
@@ -476,16 +484,16 @@ const WebGLFlowSection = () => {
       />
 
       <div className="relative z-10 container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 w-full">
-        <div className="hidden md:flex flex-col justify-center pointer-events-none text-[var(--fg)]">
+        <div className="flex flex-col justify-center pointer-events-none text-[var(--fg)] mb-8 md:mb-0">
           <div className="text-[var(--acc)] font-mono text-xs uppercase tracking-widest mb-4">
             Why Choose Us?
           </div>
-          <h2 className="text-6xl font-black mb-6 leading-tight tracking-tighter">
+          <h2 className="text-4xl md:text-6xl font-black mb-6 leading-tight tracking-tighter">
             GROWTH
             <br />
             PARTNERS
           </h2>
-          <p className="opacity-80 max-w-md text-lg leading-relaxed">
+          <p className="opacity-80 max-w-md text-base md:text-lg leading-relaxed">
             We combine creativity with data-driven strategies to deliver real
             results. No delays, no confusion—just visible growth.
           </p>
@@ -539,6 +547,7 @@ const WebGLFlowSection = () => {
 /* --- 6. THE MONOLITHS (SERVICES) --- */
 const TheMonoliths = () => {
   const targetRef = useRef<HTMLDivElement>(null);
+  const [activeCard, setActiveCard] = useState<number | null>(null); // State for mobile touch interaction
   const { scrollYProgress } = useScroll({ target: targetRef });
 
   // Add physics for smoother scroll feel
@@ -634,8 +643,8 @@ const TheMonoliths = () => {
         <div className="px-6 md:px-12 mb-8 flex justify-between items-end absolute top-32 left-0 right-0 z-10 pointer-events-none">
           {/* Header Content */}
           <div className="flex items-center gap-4 text-[var(--fg)]">
-            <div className="w-3 h-3 bg-[var(--acc)] rounded-full animate-pulse" />
-            <h2 className="text-sm font-mono uppercase tracking-widest opacity-80">
+            <div className="w-2 h-2 md:w-3 md:h-3 bg-[var(--acc)] rounded-full animate-pulse" />
+            <h2 className="text-xs md:text-sm font-mono uppercase tracking-widest opacity-80">
               Our Services // Scroll Down to Explore
             </h2>
           </div>
@@ -653,6 +662,8 @@ const TheMonoliths = () => {
               service={service}
               i={i}
               progress={smoothProgress}
+              active={activeCard === i}
+              onClick={() => setActiveCard(activeCard === i ? null : i)}
             />
           ))}
         </motion.div>
@@ -678,18 +689,22 @@ const ServiceCard = ({
   service,
   i,
   progress,
+  active,
+  onClick,
 }: {
   service: { title: string; cat: string; img: string };
   i: number;
-  progress: any; // Using any to avoid MotionValue<number> import complexity if unnecessary, or strictly import it.
-  // Ideally MotionValue<number> but let's keep it simple for this replacement context
+  progress: any;
+  active: boolean;
+  onClick: () => void;
 }) => {
   const parallax = useTransform(progress, [0, 1], ["0%", `${(i - 2) * 5}%`]);
 
   return (
     <motion.div
-      className="relative h-[60vh] w-[85vw] md:w-[45vw] flex-shrink-0 group"
+      className="relative h-[60vh] w-[85vw] md:w-[45vw] flex-shrink-0 group cursor-pointer"
       whileHover={{ scale: 0.98 }}
+      onClick={onClick}
       transition={{ duration: 0.4 }}
     >
       <div className="w-full h-full bg-white dark:bg-black relative overflow-hidden rounded-sm border-l border-[var(--border)]">
@@ -700,21 +715,48 @@ const ServiceCard = ({
           <img
             src={service.img}
             alt={service.title}
-            className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 grayscale group-hover:grayscale-0"
+            className={`w-full h-full object-cover transition-opacity duration-500 ${
+              active
+                ? "opacity-80 grayscale-0"
+                : "opacity-60 grayscale group-hover:opacity-80 group-hover:grayscale-0"
+            }`}
           />
         </motion.div>
-        {/* Updated Gradient: Forces dark overlay on hover for better text contrast */}
-        <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12 z-10 bg-gradient-to-t from-white/90 dark:from-black/80 group-hover:from-black/90 to-transparent transition-all duration-500">
+        <div
+          className={`absolute inset-0 flex flex-col justify-end p-8 md:p-12 z-10 bg-gradient-to-t transition-all duration-500 ${
+            active
+              ? "from-black/90"
+              : "from-white/90 dark:from-black/80 group-hover:from-black/90"
+          } to-transparent`}
+        >
           <div className="overflow-hidden">
-            <h3 className="text-[10vw] md:text-[5vw] font-black uppercase leading-[0.85] tracking-tighter text-[var(--fg)] group-hover:text-white transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+            <h3
+              className={`text-[10vw] md:text-[5vw] font-black uppercase leading-[0.85] tracking-tighter transition-all duration-500 ${
+                active
+                  ? "text-white translate-y-0"
+                  : "text-[var(--fg)] group-hover:text-white transform translate-y-4 group-hover:translate-y-0"
+              }`}
+            >
               {service.title}
             </h3>
           </div>
-          <div className="flex justify-between items-end mt-4 border-t border-[var(--fg)]/20 group-hover:border-white/20 pt-4 transition-colors duration-500">
+          <div
+            className={`flex justify-between items-end mt-4 border-t pt-4 transition-colors duration-500 ${
+              active
+                ? "border-white/20"
+                : "border-[var(--fg)]/20 group-hover:border-white/20"
+            }`}
+          >
             <span className="font-mono text-sm text-[var(--acc)]">
               {service.cat}
             </span>
-            <div className="flex items-center gap-2 text-[var(--fg)]/60 group-hover:text-white/60 font-mono text-xs uppercase transition-colors duration-500">
+            <div
+              className={`flex items-center gap-2 font-mono text-xs uppercase transition-colors duration-500 ${
+                active
+                  ? "text-white/60"
+                  : "text-[var(--fg)]/60 group-hover:text-white/60"
+              }`}
+            >
               <span>Details</span>
               <ArrowUpRight size={14} />
             </div>
@@ -785,10 +827,11 @@ const DigitalLoom = () => {
             <motion.div
               key={index}
               initial={false}
-              animate={{ height: activeItem === index ? "50vh" : "120px" }}
+              animate={{ height: activeItem === index ? "auto" : "140px" }} // Increased height to prevent text cutoff
               className="relative border-b border-[var(--border)] overflow-hidden transition-all duration-700 ease-[0.16,1,0.3,1] group cursor-pointer"
               onMouseEnter={() => setActiveItem(index)}
               onMouseLeave={() => setActiveItem(null)}
+              onClick={() => setActiveItem(activeItem === index ? null : index)} // Enable toggle on click for touch devices
             >
               <motion.div
                 className="absolute inset-0 z-0"
@@ -1219,11 +1262,16 @@ const SystemMetrics = () => {
                 24/7
               </motion.span>
             </h3>
-            <p className="font-mono text-xs text-[var(--fg)] opacity-60 mt-4">
+            <a
+              href="https://wa.me/916394806825"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-xs text-[var(--fg)] opacity-60 mt-4 hover:text-[var(--acc)] hover:opacity-100 transition-all block"
+            >
               WhatsApp Support
               <br />
               Always Online
-            </p>
+            </a>
           </div>
         </div>
       </div>

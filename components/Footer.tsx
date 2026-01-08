@@ -6,9 +6,9 @@ export const Footer = () => {
   return (
     <footer
       id="contact"
-      className="min-h-screen flex flex-col justify-between pt-32 pb-12 px-6 md:px-12 bg-[var(--surface)] relative z-10 w-full overflow-hidden border-t border-[var(--border)] transition-colors duration-700"
+      className="min-h-screen flex flex-col justify-between pt-20 md:pt-32 pb-12 px-6 md:px-12 bg-[var(--surface)] relative z-10 w-full overflow-hidden border-t border-[var(--border)] transition-colors duration-700"
     >
-      <div className="z-10 relative mb-20 w-full max-w-[95vw] mx-auto">
+      <div className="z-10 relative mb-12 md:mb-20 w-full max-w-[95vw] mx-auto">
         <div className="flex flex-col lg:flex-row justify-between items-start gap-16 lg:gap-32">
           {/* Left Column: Info */}
           <motion.div
@@ -18,10 +18,17 @@ export const Footer = () => {
             className="flex-1 w-full max-w-3xl"
           >
             <div className="mb-16">
+              <div className="mb-8 w-16 h-16 relative">
+                <img
+                  src="/logo.png"
+                  alt="Feelify Logo"
+                  className="w-full h-full object-contain logo-adaptive opacity-80"
+                />
+              </div>
               <h4 className="font-mono text-sm text-[var(--acc)] uppercase tracking-widest mb-6">
                 Get In Touch
               </h4>
-              <h2 className="text-5xl md:text-7xl font-black text-[var(--fg)] mb-8 leading-[0.9] tracking-tighter uppercase transition-colors">
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-black text-[var(--fg)] mb-8 leading-[0.9] tracking-tighter uppercase transition-colors">
                 Ready to transform
                 <br />
                 your business?
@@ -163,13 +170,36 @@ export const Footer = () => {
 
       <div className="flex flex-col md:flex-row justify-between items-end gap-8 pt-20 border-t border-[var(--border)]">
         <div className="flex flex-wrap gap-8 font-mono text-xs uppercase tracking-widest opacity-60 text-[var(--fg)]">
-          <a href="#" className="hover:text-[var(--acc)] transition-colors">
+          <a
+            href="https://www.instagram.com/feelify_solutions?utm_source=qr&igsh=eGo0cnE2Zmxhcjg3"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[var(--acc)] transition-colors"
+          >
             Instagram
           </a>
-          <a href="#" className="hover:text-[var(--acc)] transition-colors">
+          <a
+            href="https://www.linkedin.com/company/110243723/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[var(--acc)] transition-colors"
+          >
             LinkedIn
           </a>
-          <a href="#" className="hover:text-[var(--acc)] transition-colors">
+          <a
+            href="https://www.facebook.com/61585100334454/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[var(--acc)] transition-colors"
+          >
+            Facebook
+          </a>
+          <a
+            href="https://wa.me/916394806825"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[var(--acc)] transition-colors"
+          >
             WhatsApp
           </a>
         </div>
